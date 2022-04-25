@@ -117,20 +117,24 @@ const Trending = ({ pollMap, votesMap, employee }) => {
                   ></CardImage>
                   <CardCaption>{poll.question}</CardCaption>
                   {poll.leader == null ? (
-                    <Small style={{ fontSize: "13px" }}>
-                      {poll.count ? "Tie" : "No votes yet"}
-                    </Small>
+                    <Shorten>
+                      <Small style={{ fontSize: "13px" }}>
+                        {poll.count ? "Tie" : "No votes yet"}
+                      </Small>
+                    </Shorten>
                   ) : (
-                    <Small style={{ fontSize: "13px" }}>
+                    <Shorten>
                       {Math.round(
                         (poll.options[poll.leader].count / poll.count) * 100
                       )}
-                      % <Shorten>{poll.options[poll.leader].text}</Shorten>
-                    </Small>
+                      % {poll.options[poll.leader].text}
+                    </Shorten>
                   )}
-                  <Small style={{ color: "#666" }}>
-                    {poll.count ? `(${poll.count})` : ""}
-                  </Small>
+                  <Shorten>
+                    <Small style={{ color: "#666" }}>
+                      {poll.count ? `(${poll.count})` : ""}
+                    </Small>
+                  </Shorten>
                   <SatisfactionGroup>
                     {poll.leader == null ? (
                       <Line background={false} rating={poll.count ? 0.5 : 0} />
@@ -165,7 +169,9 @@ const Shorten = styled.div`
   overflow: hidden;
   margin: 0;
   padding: 0;
-  line-height: 75%;
+  font-size: 13px;
+  color: #333;
+  word-break: keep-all;
 `;
 
 const Modal = styled.div`
@@ -177,8 +183,9 @@ const Modal = styled.div`
 `;
 
 const Small = styled.small`
+  display: inline-block;
   font-size: 12px;
-  margin-right: 2px;
+  margin-right: 4px;
   color: #333;
   :hover {
     color: #000;
@@ -300,7 +307,7 @@ const CardCaption = styled.div`
   font-size: 15px;
   line-height: 125%;
   font-weight: regular;
-  margin-bottom: 9px;
+  margin-bottom: 12px;
   :hover {
     text-decoration: underline;
   }
