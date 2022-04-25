@@ -58,11 +58,11 @@ const Selection = styled.div`
   min-height: 145px;
   border-radius: 12px;
   padding: 24px;
-  border: 1px solid #aaa;
+  border: 2px solid #aaa;
   margin: 0 auto;
 
   :hover {
-    border: 1px solid #222;
+    border: 2px solid #222;
     cursor: pointer;
   }
 
@@ -70,7 +70,7 @@ const Selection = styled.div`
     margin-bottom: 13px;
   }
 
-  ${(props) => props.selected && "border: 1px solid #222;"}
+  ${(props) => props.selected && "border: 2px solid #222;"}
 `;
 
 const H3 = styled.h3`
