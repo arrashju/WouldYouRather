@@ -1,8 +1,7 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Image from "next/image";
 import Layout from "components/layouts/layout";
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
 
 const Leaderboard = ({ employeeMap }) => {
   let previous = { polls: 0, answered: 0 };

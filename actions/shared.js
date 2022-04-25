@@ -1,4 +1,4 @@
-import initializeData from "lib/initData";
+import initializeData from "../lib/initData";
 
 const INIT_DATA = "INIT_DATA";
 

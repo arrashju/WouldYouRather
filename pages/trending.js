@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { useState, useRef, useEffect } from "react";
-import Layout from "components/layouts/layout";
+import Layout from "../components/layouts/layout";
 import Vote from "../components/question/index";
 import { connect } from "react-redux";
 

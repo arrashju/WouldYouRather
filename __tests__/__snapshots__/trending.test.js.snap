@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders trending page before loading elements 1`] = `
+exports[`Renders trending page trending render before loading elements should match snapshot 1`] = `
 <div>
   <div
     class="sc-kgflAQ daQuIQ"
@@ -17,7 +17,7 @@ exports[`renders trending page before loading elements 1`] = `
       class="sc-ivTmOn ilVgBw"
     >
       <button
-        class="sc-cxabCf eLiLvp"
+        class="sc-cxabCf hDtBGU"
       >
         All
       </button>
@@ -37,7 +37,7 @@ exports[`renders trending page before loading elements 1`] = `
         Answered
       </button>
       <button
-        class="sc-cxabCf hDtBGU"
+        class="sc-cxabCf eLiLvp"
       >
         Unanswered
       </button>
@@ -56,7 +56,7 @@ exports[`renders trending page before loading elements 1`] = `
     <div
       class="sc-iIPllB jocqib"
     >
-      All
+      Unanswered
     </div>
     <div
       class="sc-kLLXSd hDIBJC"

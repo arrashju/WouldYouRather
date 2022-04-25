@@ -1,10 +1,10 @@
-import { INIT_DATA, handleInitData } from "./shared";
+import { INIT_DATA, handleInitData } from "../actions/shared";
 import employeeMap from "../reducers/employeeMap";
 import { createStore } from "redux";
-import reducer from "reducers";
-import middleware from "middleware";
+import reducer from "../reducers";
+import middleware from "../middleware";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { employees } from "lib/_DATA";
+import { employees } from "../lib/_DATA";
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 

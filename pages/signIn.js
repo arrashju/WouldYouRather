@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { handleSignIn } from "actions/employee";
+import { handleSignIn } from "../actions/employee";
 import { connect } from "react-redux";
 
 const personas = [
@@ -81,7 +81,7 @@ const SignIn = ({ dispatch }) => {
   );
 };
 
-const theme = require("lib/styled");
+const theme = require("../lib/styled");
 
 const Status = styled.div`
   font-size: 13px;

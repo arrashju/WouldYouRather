@@ -1,11 +1,11 @@
-import { ADD_POLL, handleAddPoll } from "./poll";
-import { INIT_DATA, handleInitData } from "./shared";
+import { ADD_POLL, handleAddPoll } from "../actions/poll";
+import { INIT_DATA, handleInitData } from "../actions/shared";
 import pollMap from "../reducers/pollMap";
 import { createStore } from "redux";
-import reducer from "reducers";
-import middleware from "middleware";
+import reducer from "../reducers";
+import middleware from "../middleware";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { questions } from "lib/_DATA";
+import { questions } from "../lib/_DATA";
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 

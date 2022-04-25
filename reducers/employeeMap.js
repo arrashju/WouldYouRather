@@ -1,5 +1,5 @@
-import { UPDATE_EMPLOYEE } from "actions/employee";
-import { INIT_DATA } from "actions/shared";
+import { UPDATE_EMPLOYEE } from "../actions/employee";
+import { INIT_DATA } from "../actions/shared";
 
 const employeeMap = (state = {}, action) => {
   switch (action.type) {

@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { connect } from "react-redux";
-import { handleUpdatePoll } from "actions/poll";
-import { handleUpdateVote } from "actions/votes";
-import { handleAddVote } from "actions/votes";
-import { handleUpdateEmployee } from "actions/employee";
+import { handleUpdatePoll } from "../../actions/poll";
+import { handleUpdateVote } from "../../actions/votes";
+import { handleAddVote } from "../../actions/votes";
+import { handleUpdateEmployee } from "../../actions/employee";
 import Image from "next/image";
 
 const Question = ({
@@ -150,7 +150,7 @@ const Question = ({
   );
 };
 
-const theme = require("lib/styled");
+const theme = require("../../lib/styled");
 
 const Path = styled.path``;
 

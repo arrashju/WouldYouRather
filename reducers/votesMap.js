@@ -1,5 +1,5 @@
-import { UPDATE_VOTE, ADD_VOTE } from "actions/votes";
-import { INIT_DATA } from "actions/shared";
+import { UPDATE_VOTE, ADD_VOTE } from "../actions/votes";
+import { INIT_DATA } from "../actions/shared";
 
 const votesMap = (state = {}, action) => {
   switch (action.type) {

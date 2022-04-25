@@ -24,6 +24,7 @@ export default class MyDocument extends Document {
 
       return {
         ...initialProps,
+        //@ts-ignore
         styles: (
           <>
             {initialProps.styles}

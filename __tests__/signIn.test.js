@@ -1,8 +1,8 @@
-import SignIn from "./signIn";
+import SignIn from "../pages/signIn";
 import "@testing-library/jest-dom";
 import { Provider as ReduxProvider } from "react-redux";
-import reducer from "reducers";
-import middleware from "middleware";
+import reducer from "../reducers";
+import middleware from "../middleware";
 import { createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import singletonRouter from "next/router";

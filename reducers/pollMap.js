@@ -1,5 +1,5 @@
-import { UPDATE_POLL, ADD_POLL } from "actions/poll";
-import { INIT_DATA } from "actions/shared";
+import { UPDATE_POLL, ADD_POLL } from "../actions/poll";
+import { INIT_DATA } from "../actions/shared";
 
 const pollMap = (state = {}, action) => {
   switch (action.type) {

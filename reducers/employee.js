@@ -1,5 +1,5 @@
-import { SIGN_IN } from "actions/employee";
-import { INIT_DATA } from "actions/shared";
+import { SIGN_IN } from "../actions/employee";
+import { INIT_DATA } from "../actions/shared";
 
 const employee = (state = null, action) => {
   switch (action.type) {
