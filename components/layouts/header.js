@@ -3,11 +3,24 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const router = useRouter();
   const node = useRef();
   const [hideDropdown, setHideDropdown] = useState(true);
+  const [shadow, setShadow] = useState(true);
   const employee = useSelector((state) => state["employee"]);
+
+  useEffect(() => {
+    if (router.pathname == "/trending") {
+      setShadow(false);
+    } else {
+      setShadow(true);
+    }
+
+    console.log(router.pathname);
+  }, [router]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
@@ -34,7 +47,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Nav className={`nav`}>
+      <Nav className={`nav`} shadow={shadow}>
         <Link href="/">
           <a>
             <Image src="/logo.svg" width={35} height={35} />
@@ -177,14 +190,13 @@ const Li = styled.div`
 const DropDown = styled.div`
   background-color: white;
   filter: drop-shadow(0px 2px 6px rgba(136, 136, 136, 0.35));
-  color: #555;
   display: ${(props) => (props.hideDropdown ? "none" : "flex")};
   opacity: ${(props) => (props.hideDropdown ? "0" : "1")};
   width: 270px;
   position: absolute;
   right: 4%;
   top: 4.2rem;
-  z-index: 1001;
+  z-index: 1000;
   text-align: left;
   border-radius: 8px;
   font-weight: 400;
@@ -212,13 +224,18 @@ const Nav = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
+  z-index: 500;
   width: 90%;
   background-color: #fcfcfc;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
   color: #333;
   height: 4.5rem;
   padding: 0 5%;
+  ${(props) =>
+    props.shadow &&
+    css`
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); ;
+    `}
 `;
 
 export default Navbar;

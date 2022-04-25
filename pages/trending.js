@@ -198,7 +198,7 @@ const Section = styled.div`
 const Topics = styled.div`
   position: fixed;
   top: 4.5em;
-  z-index: 1000;
+  z-index: 0;
   padding-bottom: 20px;
   padding-top: 15px;
   border-bottom: 1px solid #ddd;
