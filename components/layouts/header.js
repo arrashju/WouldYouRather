@@ -114,7 +114,7 @@ const Navbar = () => {
                 padding: "12px 20px 12px",
               }}
             >
-              <Link href="leaderboard">
+              <Link href="../../leaderboard">
                 <Li link={true}>Leaderboard</Li>
               </Link>
             </div>
@@ -123,7 +123,7 @@ const Navbar = () => {
                 padding: "12px 20px 22px",
               }}
             >
-              <Link href="trending">
+              <Link href="../../trending">
                 <Li link={true}>Trending</Li>
               </Link>
             </div>
@@ -133,7 +133,7 @@ const Navbar = () => {
                 padding: "15px 20px",
               }}
             >
-              <Link href="signIn">
+              <Link href="../../signIn">
                 <Li
                   style={{
                     textAlign: "center",
