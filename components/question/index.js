@@ -183,7 +183,7 @@ const Question = ({
           )}
 
           <SubmitButton type="submit" data-testid="submit-button">
-            {voteId ? "Update" : "Submit"}
+            {voteId ? "Update" : "Vote"}
           </SubmitButton>
         </FlexBox>
       </Form>
