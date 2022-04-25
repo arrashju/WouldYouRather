@@ -68,6 +68,7 @@ const Input = styled.input`
   padding: 11px 0;
   font-size: 20px;
   color: #444;
+  text-align: center;
 
   :focus {
     outline: 0;

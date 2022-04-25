@@ -19,16 +19,18 @@ const Navigator = ({ hide }) => {
 
 const Remaining = styled.div`
   font-size: 14px;
-  color: #666;
+  color: #555;
 `;
 
 const Nav = styled.div`
   position: fixed;
   bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: min(90%, 750px);
   padding: 0 5%;
 
   @media (max-height: 750px) {
