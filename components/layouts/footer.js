@@ -30,7 +30,7 @@ const A = styled.a`
 
 const Container = styled.div`
   background: #fcfdff;
-  padding: 35px 0;
+  padding: 35px 5px;
 `;
 
 const Foot = styled.footer`
