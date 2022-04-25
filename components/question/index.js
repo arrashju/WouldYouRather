@@ -172,7 +172,7 @@ const Question = ({
             )}
 
             <SubmitButton type="submit" data-testid="submit-button">
-              {update && type == "full" ? "Update" : "Submit"}
+              {update ? "Update" : "Submit"}
             </SubmitButton>
           </FlexBox>
         </Form>
