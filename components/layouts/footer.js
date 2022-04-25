@@ -51,6 +51,7 @@ const P = styled.p`
   }
   text-align: center;
   font-size: 14px;
+  line-height: 150%;
 `;
 
 export default Footer;
