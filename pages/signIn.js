@@ -5,18 +5,7 @@ import { useRouter } from "next/router";
 import { handleSignIn } from "../actions/employee";
 import { connect } from "react-redux";
 
-const personas = [
-  "Viraj",
-  "Slavomir",
-  "Lindsey",
-  "Gabriela",
-  "Emma",
-  "Donghai",
-  "Brian",
-  "Aliyah",
-];
-
-const SignIn = ({ dispatch }) => {
+const SignIn = ({ dispatch, employeeMap }) => {
   const [status, setStatus] = useState(null);
   const [selected, setSelected] = useState(null);
   const router = useRouter();
@@ -24,7 +13,7 @@ const SignIn = ({ dispatch }) => {
   const handleClick = () => {
     if (selected) {
       setStatus("success");
-      dispatch(handleSignIn(personas[selected]));
+      dispatch(handleSignIn(selected));
       router.push("/trending", undefined, { shallow: true });
     } else {
       setStatus("error");
@@ -35,17 +24,18 @@ const SignIn = ({ dispatch }) => {
     <>
       <Container>
         <Box>
-          <div style={{ marginBottom: "30px" }}>
+          <div style={{ marginBottom: "30px", textAlign: "center" }}>
             <Image src="/logo.svg" width={62} height={54} />
           </div>
           <H2>Welcome</H2>
           <Grid>
-            {personas.map((persona, key) => {
+            {Object.keys(employeeMap).map((persona, key) => {
               return (
                 <Persona
-                  selected={selected == key}
+                  selected={selected == persona}
                   onClick={() => {
-                    setSelected(key);
+                    setSelected(persona);
+                    setStatus(null);
                   }}
                   key={key}
                   data-testid={persona}
@@ -56,6 +46,12 @@ const SignIn = ({ dispatch }) => {
               );
             })}
           </Grid>
+          <Spinner hidden={Object.keys(employeeMap).length > 0}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </Spinner>
           <Status>
             {status == "error" && (
               <Error data-testid="error-header">
@@ -70,10 +66,11 @@ const SignIn = ({ dispatch }) => {
             type="submit"
             onClick={handleClick}
             data-testid="submit-button"
+            selected={selected}
           >
             {selected === null
               ? "Select an Employee"
-              : `Continue with ${personas[selected]}`}
+              : `Continue with ${selected}`}
           </Button>
         </Box>
       </Container>
@@ -82,6 +79,46 @@ const SignIn = ({ dispatch }) => {
 };
 
 const theme = require("../lib/styled");
+
+const Spinner = styled.div`
+  display: ${(props) => (props.hidden ? "none" : "inline-block")};
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  opacity: 50%;
+  > * {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    margin: 5px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #40526d transparent transparent transparent;
+  }
+  div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
 
 const Status = styled.div`
   font-size: 13px;
@@ -111,6 +148,7 @@ const Grid = styled.div`
   justify-content: center;
   text-align: center;
   margin: 24px 27px 24px 27px;
+  min-height: 200px;
 `;
 
 const Name = styled.div`
@@ -149,7 +187,7 @@ const Button = styled.button`
   width: 100%;
   border: none;
   font-size: 15px;
-  color: white;
+  ${(props) => (props.selected ? "color: white" : "color: #eee")};
   border-radius: 3px;
   :hover {
     pointer: cursor;
@@ -164,6 +202,7 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
+  position: relative
   text-align: center;
   flex-direction: column;
   align-items: center;
@@ -179,14 +218,17 @@ const Box = styled.div`
     height: 100%;
     border: none;
     box-shadow: none;
+
+  padding: 15px 20px;
   }
 `;
 
 const H2 = styled.div`
   font-size: 21px;
   margin-bottom: 25px;
+  text-align: center;
 `;
 
 export default connect((state) => {
-  return {};
+  return { employeeMap: state["employeeMap"] };
 })(SignIn);

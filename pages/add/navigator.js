@@ -55,6 +55,9 @@ const BackButton = styled.button`
   @media (max-width: 350px) {
     padding: 10px 10px;
   }
+
+  transition: background 0.2s ease;
+  transition: border 0.2s ease;
 `;
 const ContinueButton = styled.button`
   padding: 10px 20px;
@@ -76,6 +79,9 @@ const ContinueButton = styled.button`
   @media (max-width: 350px) {
     padding: 8px 8px;
   }
+
+  transition: background 0.2s ease;
+  transition: border 0.2s ease;
 `;
 
 export default Navigator;

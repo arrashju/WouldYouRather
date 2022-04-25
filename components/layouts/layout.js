@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
 
 const Main = styled.main`
   padding-top: 4.5rem;
-  min-height: 100vh;
+  height: 100%;
   width: 100%;
 `;
 

@@ -81,6 +81,9 @@ const HeroButton = styled.button`
     color: ${theme.color.blue};
     cursor: pointer;
   }
+
+  transition: background 0.2s ease;
+  transition: border 0.2s ease;
 `;
 
 const Hero = styled.div`
@@ -130,6 +133,9 @@ const PostButton = styled.button`
     background: #ddd;
     cursor: pointer;
   }
+
+  transition: background 0.2s ease;
+  transition: border 0.2s ease;
 `;
 
 const H1 = styled.div`

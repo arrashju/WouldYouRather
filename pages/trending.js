@@ -13,6 +13,9 @@ const Trending = ({ pollMap, votesMap, employee }) => {
   const [modal, setModal] = useState(false);
   const [result, setResult] = useState(null);
   const node = useRef();
+  const scrollNode = useRef();
+  const wheelOpt = { passive: false };
+  const [wheelEvent, setWheelEvent] = useState("wheel");
 
   useEffect(() => {
     const result = Object.keys(pollMap).filter((key) => {
@@ -29,11 +32,20 @@ const Trending = ({ pollMap, votesMap, employee }) => {
     });
 
     setResult(result);
-  }, [topic]);
+  }, [topic, pollMap]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick, false);
   }, []);
+
+  useEffect(() => {
+    if (scrollNode && scrollNode.current) {
+      if (modal) {
+        scrollTo(0, 0);
+        disableScroll();
+      } else enableScroll();
+    }
+  }, [modal]);
 
   const handleOutsideClick = (e) => {
     //@ts-ignore
@@ -47,9 +59,58 @@ const Trending = ({ pollMap, votesMap, employee }) => {
     }
   };
 
+  const disableScroll = () => {
+    scrollNode.current.addEventListener(
+      "DOMMouseScroll",
+      preventDefault,
+      false
+    ); // older FF
+    scrollNode.current.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+    scrollNode.current.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
+    scrollNode.current.addEventListener(
+      "keydown",
+      preventDefaultForScrollKeys,
+      false
+    );
+  };
+
+  const enableScroll = () => {
+    scrollNode.current.removeEventListener(
+      "DOMMouseScroll",
+      preventDefault,
+      false
+    );
+    scrollNode.current.removeEventListener(
+      wheelEvent,
+      preventDefault,
+      wheelOpt
+    );
+    scrollNode.current.removeEventListener(
+      "touchmove",
+      preventDefault,
+      wheelOpt
+    );
+    scrollNode.current.removeEventListener(
+      "keydown",
+      preventDefaultForScrollKeys,
+      false
+    );
+  };
+
+  const preventDefault = (e) => {
+    e.preventDefault();
+  };
+
+  const preventDefaultForScrollKeys = (e) => {
+    if (keys[e.keyCode]) {
+      preventDefault(e);
+      return false;
+    }
+  };
+
   return (
     <>
-      <Modal hidden={!modal}>
+      <Modal ref={scrollNode} hidden={!modal}>
         <VoteWrapper ref={node}>
           <Vote setModal={setModal} id={id} />
         </VoteWrapper>
@@ -188,6 +249,8 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0%, 0%, 0%, 0.85);
+  margin: 0;
+  overflow: auto;
 `;
 
 const Small = styled.small`
@@ -197,6 +260,8 @@ const Small = styled.small`
   :hover {
     color: #000;
   }
+
+  transition: color 0.2s ease;
 `;
 
 const Section = styled.div`
@@ -231,6 +296,7 @@ const Topics = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
   ::-webkit-scrollbar ;
+  z-index: 4;
 `;
 
 const Topic = styled.button`
@@ -318,6 +384,8 @@ const CardCaption = styled.div`
   :hover {
     text-decoration: underline;
   }
+
+  transition: text-decoration 0.2s ease;
 `;
 
 const Cards = styled.div`
@@ -341,6 +409,9 @@ const Line = styled.div`
   :hover {
     filter: brightness(0.9);
   }
+
+  transition: filter 0.2s ease;
+
   ${(props) => {
     if (!props.background) {
       return css`

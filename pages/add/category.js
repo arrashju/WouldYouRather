@@ -68,6 +68,8 @@ const Selection = styled.div`
     margin-bottom: 13px;
   }
 
+  transition: border 0.2s ease;
+
   ${(props) => props.selected && "border: 2px solid #222;"}
 `;
 

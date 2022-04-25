@@ -125,7 +125,7 @@ const Input = styled.input`
 
   :focus {
     outline: 0;
-    // border-bottom: 1px solid ${theme.color.blue};
+    border-bottom: 2px solid black;
   }
 `;
 
