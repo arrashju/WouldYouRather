@@ -224,12 +224,10 @@ const Topic = styled.button`
   border-radius: 20px;
   padding: 8px 22px;
   background: white;
-  :not(:last-child) {
-    margin-right: 15px;
+  margin-right: 15px;
 
-    @media (max-width: 500px) {
-      margin-right: 8px;
-    }
+  @media (max-width: 500px) {
+    margin-right: 8px;
   }
 
   :hover {
@@ -246,7 +244,6 @@ const Topic = styled.button`
         background: #333;
         color: white;
         order: -1;
-        margin-right: 8px;
       `;
     }
   }}

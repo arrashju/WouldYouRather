@@ -199,7 +199,7 @@ const DropDown = styled.div`
   border-radius: 8px;
   font-weight: 400;
   @media (max-width: 897px) {
-    width: 175px;
+    width: 240px;
   }
   -webkit-transition: opacity 0.15s ease-out;
   -moz-transition: opacity 0.15s ease-out;
