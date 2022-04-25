@@ -72,7 +72,11 @@ const AddPoll = ({ dispatch, employee, employeeMap }) => {
         category,
         setCategory,
         handleBack,
-        remaining: { question: "3", options: "2", category: "Last" },
+        remaining: {
+          question: "3 items to submit",
+          options: "2 items to submit",
+          category: "Last item to submit",
+        },
         page,
         setPage,
       }}

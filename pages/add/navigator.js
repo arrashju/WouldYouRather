@@ -15,7 +15,7 @@ const Navigator = ({ hide }) => {
         >
           Back
         </BackButton>
-        <Remaining>{remaining[page]} item to submit</Remaining>
+        <Remaining>{remaining[page]}</Remaining>
         <ContinueButton type="submit">Continue</ContinueButton>
       </Nav>
     </>

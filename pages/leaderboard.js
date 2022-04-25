@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 const Leaderboard = ({ employeeMap }) => {
   let previous = { polls: 0, answered: 0 };
   let currentRank = 0;
+
   const leaderboard = Object.keys(employeeMap).sort((a, b) => {
     const p = 2 / 3;
     const k = 1 / 3;
