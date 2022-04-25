@@ -153,7 +153,7 @@ const Question = ({
                         (pollMap[id].options[0].count / pollMap[id].count) *
                         100
                       ).toFixed(0)}
-                      % God Squad
+                      % {pollMap[id].options[0].text}
                     </div>
                     <div>({pollMap[id].options[0].count} votes)</div>
                   </Result>
@@ -163,7 +163,7 @@ const Question = ({
                         (pollMap[id].options[1].count / pollMap[id].count) *
                         100
                       ).toFixed(0)}
-                      % God Squad
+                      % {pollMap[id].options[1].text}
                     </div>
                     <div>({pollMap[id].options[1].count} votes)</div>
                   </Result>
