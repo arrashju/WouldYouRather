@@ -34,7 +34,7 @@ const Leaderboard = ({ employeeMap }) => {
               employeeMap[name].answered == previous.answered
             )
           ) {
-            currentRank += 1;
+            currentRank = key + 1;
             previous = {
               polls: employeeMap[name].polls,
               answered: employeeMap[name].answered,

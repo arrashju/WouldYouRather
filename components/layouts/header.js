@@ -18,8 +18,6 @@ const Navbar = () => {
     } else {
       setShadow(true);
     }
-
-    console.log(router.pathname);
   }, [router]);
 
   useEffect(() => {

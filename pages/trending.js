@@ -71,13 +71,6 @@ const Trending = ({ pollMap, votesMap, employee }) => {
         <H2>{topic}</H2>
         <Cards>
           {Object.keys(pollMap)
-            .sort((a, b) => {
-              console.log(a, b);
-              if (pollMap[b].count > pollMap[a].count) return 1;
-              else if (pollMap[a].count > pollMap[b].count) return -1;
-
-              return 0;
-            })
             .filter((key) => {
               switch (topic) {
                 case "All":
@@ -94,7 +87,12 @@ const Trending = ({ pollMap, votesMap, employee }) => {
                   return pollMap[key].category == topic;
               }
             })
+            .sort((a, b) => {
+              if (pollMap[b].count > pollMap[a].count) return 1;
+              else if (pollMap[a].count > pollMap[b].count) return -1;
 
+              return 0;
+            })
             .map((key) => {
               const poll = pollMap[key];
               return (
