@@ -123,6 +123,10 @@ const Name = styled.div`
 
 const Persona = styled.div`
   cursor: pointer;
+  padding-bottom: 5px;
+
+  border-bottom: ${(props) =>
+    props.selected ? `3px solid ${theme.color.blue}` : `3px solid white`};
 
   :hover {
     ${Avatar} {
@@ -156,10 +160,10 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   min-height: 100vh;
+  background: #fff;
 `;
 
 const Box = styled.div`
-  display: block;
   text-align: center;
   flex-direction: column;
   align-items: center;
@@ -171,7 +175,7 @@ const Box = styled.div`
   box-shadow: 0px 3px 18px 11px rgba(0, 0, 0, 0.1);
   border-radius: 7px;
 
-  @media (max-width: 375px) {
+  @media (max-width: 450px) {
     height: 100%;
     border: none;
     box-shadow: none;

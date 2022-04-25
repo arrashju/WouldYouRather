@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { PollContext } from "hooks/PollContext";
 
-const Navigator = () => {
+const Navigator = ({ hide }) => {
   const { handleBack, remaining, page } = useContext(PollContext);
   return (
     <>
-      <Nav>
+      <Nav hide={hide}>
         <BackButton
           onClick={(e) => {
             e.preventDefault();
@@ -35,6 +35,10 @@ const Nav = styled.div`
   align-items: center;
   width: 90%;
   padding: 0 5%;
+
+  @media (max-height: 750px) {
+    ${(props) => props.hide && "display: none;"}
+  }
 `;
 
 const BackButton = styled.button`

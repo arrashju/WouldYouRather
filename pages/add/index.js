@@ -52,10 +52,13 @@ const AddPoll = ({ dispatch, employee, employeeMap }) => {
     switch (page) {
       case "question":
         router.push("trending", undefined, { shallow: true });
+        break;
       case "options":
         setPage("question");
+        break;
       case "category":
         setPage("options");
+        break;
     }
   };
 

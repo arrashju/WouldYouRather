@@ -172,7 +172,6 @@ const Modal = styled.div`
 
 const Small = styled.small`
   font-size: 12px;
-  margin-bottom: 7px;
   margin-right: 2px;
   color: #333;
   :hover {
@@ -181,8 +180,8 @@ const Small = styled.small`
 `;
 
 const Section = styled.div`
-  padding: 50px 0;
-
+  padding: 100px 0;
+  position: relative;
   > * {
     padding: 0 5%;
     overflow-x: scroll;
@@ -197,15 +196,22 @@ const Section = styled.div`
 `;
 
 const Topics = styled.div`
+  position: fixed;
+  top: 4.5em;
+  z-index: 1000;
+  padding-bottom: 20px;
+  padding-top: 15px;
+  border-bottom: 1px solid #ddd;
+  min-width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 57px;
   overflow-y: hidden;
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
   ::-webkit-scrollbar ;
+  background: white;
 `;
 
 const Topic = styled.button`

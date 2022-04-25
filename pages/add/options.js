@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { PollContext } from "hooks/PollContext";
 import Navigator from "./navigator";
 
 const Options = () => {
   const { options, setOptions, setPage } = useContext(PollContext);
+  const [hide, setHide] = useState(false);
 
   const handleChange = (e) => {
     switch (e.target.id) {
@@ -40,6 +41,12 @@ const Options = () => {
               value={options[0].text}
               onChange={handleChange}
               id="0"
+              onFocus={() => {
+                setHide(true);
+              }}
+              onBlur={() => {
+                setHide(false);
+              }}
               required
             />
           </InputGroup>
@@ -50,11 +57,17 @@ const Options = () => {
               value={options[1].text}
               onChange={handleChange}
               id="1"
+              onFocus={() => {
+                setHide(true);
+              }}
+              onBlur={() => {
+                setHide(false);
+              }}
               required
             />
           </InputGroup>
         </Center>
-        <Navigator />
+        <Navigator hide={hide} />
       </Form>
     </>
   );

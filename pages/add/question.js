@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { PollContext } from "hooks/PollContext";
 import Navigator from "./navigator";
 
 const Question = () => {
   const { question, setQuestion, setPage } = useContext(PollContext);
+  const [hide, setHide] = useState(false);
+
   const handleChange = (e) => {
     setQuestion(e.target.value);
   };
@@ -23,10 +25,16 @@ const Question = () => {
             type="text"
             value={question}
             onChange={handleChange}
+            onFocus={() => {
+              setHide(true);
+            }}
+            onBlur={() => {
+              setHide(false);
+            }}
             required
           />
         </Center>
-        <Navigator />
+        <Navigator hide={hide} />
       </Form>
     </>
   );

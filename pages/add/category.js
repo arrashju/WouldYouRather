@@ -55,7 +55,7 @@ const theme = require("lib/styled");
 
 const Selection = styled.div`
   text-align: left;
-  width: min(447px, 100%);
+  width: min(447px, 80%);
   min-height: 145px;
   border-radius: 12px;
   padding: 24px;
