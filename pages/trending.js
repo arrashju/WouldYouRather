@@ -11,7 +11,25 @@ const Trending = ({ pollMap, votesMap, employee }) => {
   const [topic, setTopic] = useState("Unanswered");
   const [id, setId] = useState(null);
   const [modal, setModal] = useState(false);
+  const [result, setResult] = useState(null);
   const node = useRef();
+
+  useEffect(() => {
+    const result = Object.keys(pollMap).filter((key) => {
+      switch (topic) {
+        case "All":
+          return true;
+        case "Answered":
+          return myVotes.filter((vote) => vote.pollId == key).length > 0;
+        case "Unanswered":
+          return myVotes.filter((vote) => vote.pollId == key).length < 1;
+        default:
+          return pollMap[key].category == topic;
+      }
+    });
+
+    setResult(result);
+  }, [topic]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick, false);
@@ -70,85 +88,75 @@ const Trending = ({ pollMap, votesMap, employee }) => {
         <H1>Trending Polls</H1>
         <H2>{topic}</H2>
         <Cards>
-          {Object.keys(pollMap)
-            .filter((key) => {
-              switch (topic) {
-                case "All":
-                  return true;
-                case "Answered":
-                  return (
-                    myVotes.filter((vote) => vote.pollId == key).length > 0
-                  );
-                case "Unanswered":
-                  return (
-                    myVotes.filter((vote) => vote.pollId == key).length < 1
-                  );
-                default:
-                  return pollMap[key].category == topic;
-              }
-            })
-            .sort((a, b) => {
-              if (pollMap[b].count > pollMap[a].count) return 1;
-              else if (pollMap[a].count > pollMap[b].count) return -1;
+          {result &&
+            result.length > 0 &&
+            result
+              .sort((a, b) => {
+                if (pollMap[b].count > pollMap[a].count) return 1;
+                else if (pollMap[a].count > pollMap[b].count) return -1;
 
-              return 0;
-            })
-            .map((key) => {
-              const poll = pollMap[key];
-              return (
-                <Card
-                  onClick={() => {
-                    setId(key);
-                    setModal((modal) => !modal);
-                  }}
-                  key={key}
-                >
-                  <CardImage
-                    style={{
-                      background: `${
-                        poll.image
-                          ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${poll.image})`
-                          : "gray"
-                      }`,
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "top left",
+                return 0;
+              })
+              .map((key) => {
+                const poll = pollMap[key];
+                return (
+                  <Card
+                    onClick={() => {
+                      setId(key);
+                      setModal((modal) => !modal);
                     }}
-                  ></CardImage>
-                  <CardCaption>{poll.question}</CardCaption>
-                  {poll.leader == null ? (
+                    key={key}
+                  >
+                    <CardImage
+                      style={{
+                        background: `${
+                          poll.image
+                            ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${poll.image})`
+                            : "gray"
+                        }`,
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "top left",
+                      }}
+                    ></CardImage>
+                    <CardCaption>{poll.question}</CardCaption>
+                    {poll.leader == null ? (
+                      <Shorten>
+                        <Small style={{ fontSize: "13px" }}>
+                          {poll.count ? "Tie" : "No votes yet"}
+                        </Small>
+                      </Shorten>
+                    ) : (
+                      <Shorten>
+                        {Math.round(
+                          (poll.options[poll.leader].count / poll.count) * 100
+                        )}
+                        % {poll.options[poll.leader].text}
+                      </Shorten>
+                    )}
                     <Shorten>
-                      <Small style={{ fontSize: "13px" }}>
-                        {poll.count ? "Tie" : "No votes yet"}
+                      <Small style={{ color: "#666" }}>
+                        {poll.count ? `(${poll.count})` : ""}
                       </Small>
                     </Shorten>
-                  ) : (
-                    <Shorten>
-                      {Math.round(
-                        (poll.options[poll.leader].count / poll.count) * 100
+                    <SatisfactionGroup>
+                      {poll.leader == null ? (
+                        <Line
+                          background={false}
+                          rating={poll.count ? 0.5 : 0}
+                        />
+                      ) : (
+                        <Line
+                          background={false}
+                          rating={poll.options[poll.leader].count / poll.count}
+                        />
                       )}
-                      % {poll.options[poll.leader].text}
-                    </Shorten>
-                  )}
-                  <Shorten>
-                    <Small style={{ color: "#666" }}>
-                      {poll.count ? `(${poll.count})` : ""}
-                    </Small>
-                  </Shorten>
-                  <SatisfactionGroup>
-                    {poll.leader == null ? (
-                      <Line background={false} rating={poll.count ? 0.5 : 0} />
-                    ) : (
-                      <Line
-                        background={false}
-                        rating={poll.options[poll.leader].count / poll.count}
-                      />
-                    )}
-                    <Line background={true} rating={1} />
-                  </SatisfactionGroup>
-                </Card>
-              );
-            })}
+                      <Line background={true} rating={1} />
+                    </SatisfactionGroup>
+                  </Card>
+                );
+              })}
+          {result && result.length == 0 && "No results found"}
         </Cards>
       </Section>
     </>

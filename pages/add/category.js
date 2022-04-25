@@ -50,8 +50,6 @@ const Category = () => {
   );
 };
 
-const theme = require("lib/styled");
-
 const Selection = styled.div`
   text-align: left;
   width: min(447px, 80%);
