@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import Question from "./question";
 import Options from "./options";
 import Category from "./category";
@@ -10,6 +8,8 @@ import { connect } from "react-redux";
 import { handleAddPoll } from "actions/poll";
 import { handleUpdateEmployee } from "actions/employee";
 import { useRouter } from "next/router";
+import Logo from "../../components/icons/logo";
+import Link from "next/link";
 
 const AddPoll = ({ dispatch, employee, employeeMap }) => {
   const router = useRouter();
@@ -81,11 +81,11 @@ const AddPoll = ({ dispatch, employee, employeeMap }) => {
         setPage,
       }}
     >
-      <Logo>
-        <Link href="/">
-          <Image src="/logo.svg" width={35} height={31} />
-        </Link>
-      </Logo>
+      <Link href="/">
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+      </Link>
       {page == "question" && <Question />}
       {page == "options" && <Options />}
       {page == "category" && <Category />}
@@ -93,9 +93,7 @@ const AddPoll = ({ dispatch, employee, employeeMap }) => {
   );
 };
 
-const theme = require("lib/styled");
-
-const Logo = styled.div`
+const LogoWrapper = styled.div`
   position: absolute;
   top: 30px;
   left: 5%;
