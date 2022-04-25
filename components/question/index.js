@@ -271,7 +271,7 @@ const ImgWrapper = styled.div`
 
 const Form = styled.form`
   position: absolute;
-  top: ${(props) => (props.theme.type == "full" ? "50%" : "20em")};
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0px 1px 7px 1px rgba(0, 0, 0, 0.15);
