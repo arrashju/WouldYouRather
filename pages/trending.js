@@ -163,12 +163,11 @@ const VoteWrapper = styled.div``;
 
 const Shorten = styled.div`
   display: inline-block;
-  max-width: 63px;
+  max-width: 90px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin: 0;
-  padding: 0;
+  margin-right: 2px;
   font-size: 13px;
   color: #333;
   word-break: keep-all;
@@ -185,7 +184,6 @@ const Modal = styled.div`
 const Small = styled.small`
   display: inline-block;
   font-size: 12px;
-  margin-right: 4px;
   color: #333;
   :hover {
     color: #000;
