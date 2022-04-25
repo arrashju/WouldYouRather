@@ -91,7 +91,7 @@ const Navbar = () => {
               <div
                 style={{
                   textAlign: "center",
-                  color: "#666",
+                  color: "#555",
                   padding: "15px 20px",
                   fontSize: "15px",
                 }}
@@ -137,7 +137,7 @@ const Navbar = () => {
                 <Li
                   style={{
                     textAlign: "center",
-                    color: "#777",
+                    color: "#555",
                     fontSize: "15px",
                   }}
                   link={true}
@@ -170,7 +170,7 @@ const Li = styled.div`
   background: none;
   border: none;
   text-transform: none;
-  color: #666;
+  color: #555;
   ${(props) =>
     props.link &&
     css`
