@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styled, { css, ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { handleUpdatePoll } from "../../actions/poll";
@@ -18,13 +18,14 @@ const Question = ({
   type,
   id,
 }) => {
+  //get all of my votes
   const voteId = Object.keys(votesMap).filter((key) => {
     return votesMap[key].voter == employee.name && votesMap[key].pollId == id;
   })[0];
   const [selected, setSelected] = useState(null);
-  const update = voteId;
 
   useEffect(() => {
+    //if vote already exists, prepopulate with choice
     const selected =
       votesMap[voteId] &&
       votesMap[voteId].hasOwnProperty("option") &&
@@ -37,23 +38,34 @@ const Question = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    //on form submission, return if neither option is selected
+    //(omit zero because means option 0 is selected)
     if (selected === null || selected === undefined) return;
 
     let myVote;
     let poll = pollMap[id];
 
+    //if vote already exists
     if (voteId) {
+      //get vote
       myVote = votesMap[voteId];
 
+      //update vote
       dispatch(handleUpdateVote(voteId, { ...myVote, option: selected }));
+
+      //reset tally
       poll.options[myVote.option].count -= 1;
     } else {
+      //if vote doesn't already exist
+
+      //format vote
       myVote = {
         pollId: id,
         voter: employee.name,
         option: selected,
       };
 
+      //add vote
       dispatch(handleAddVote([Object.keys(votesMap).length], myVote));
       dispatch(
         handleUpdateEmployee(employee.name, {
@@ -63,8 +75,12 @@ const Question = ({
       );
     }
 
+    //update new tally for O(1) runtime on future visitation
     poll.options[selected].count += 1;
 
+    //null: tie
+    //0: option 0 took the lead
+    //1: option 1 took the lead
     const newPoll = {
       ...poll,
       leader:
@@ -86,108 +102,108 @@ const Question = ({
 
   return (
     <>
-      <ThemeProvider theme={{ update, type }}>
-        <Form onSubmit={handleSubmit}>
-          <ImgWrapper>
-            <Avatar src={`/avatars/${pollMap[id].creator}.webp`} />
-            {type == "full" ? (
-              <Icon
-                onClick={() => {
-                  setModal(false);
-                }}
-              >
-                <Image src="/close.svg" width={20} height={20} />
-              </Icon>
-            ) : (
-              <Icon>
-                <Link href={`/questions/${id}`}>
+      <Form onSubmit={handleSubmit}>
+        <ImgWrapper>
+          <Avatar src={`/avatars/${pollMap[id].creator}.webp`} />
+          {type == "full" ? (
+            <Icon
+              onClick={() => {
+                setModal(false);
+              }}
+            >
+              <Image src="/close.svg" width={20} height={20} />
+            </Icon>
+          ) : (
+            <Icon>
+              <Link href={`/questions/${id}`} passHref>
+                <a>
                   <Image src="/expand.svg" width={20} height={20} />
-                </Link>
-              </Icon>
-            )}
-            {pollMap[id].image && (
-              <Image
-                src={`${pollMap[id].image}`}
-                width={367}
-                height={367}
-                objectFit="cover"
-              />
-            )}
-          </ImgWrapper>
-          <FlexBox>
-            <Rather>Would You Rather</Rather>
-            <Vote>{pollMap[id].question}</Vote>
-            <RadioGroup>
-              <RadioButton
-                type="radio"
-                id="0"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setSelected(0);
-                }}
-                value={selected == 0}
-                required
-              />
-              <Label htmlFor="1">{pollMap[id].options[0].text}</Label>
-            </RadioGroup>
-            <RadioGroup>
-              <RadioButton
-                type="radio"
-                name="0"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setSelected(1);
-                }}
-                value={selected == 1}
-                required
-              />
-              <Label htmlFor="1">{pollMap[id].options[1].text}</Label>
-            </RadioGroup>
-            {update && type == "full" && (
-              <>
-                <H4>Results</H4>
-                <Results>
-                  <Result>
-                    <div>
-                      {(
-                        (pollMap[id].options[0].count / pollMap[id].count) *
-                        100
-                      ).toFixed(0)}
-                      % {pollMap[id].options[0].text}
-                    </div>
-                    <div>({pollMap[id].options[0].count} votes)</div>
-                  </Result>
-                  <Result>
-                    <div>
-                      {(
-                        (pollMap[id].options[1].count / pollMap[id].count) *
-                        100
-                      ).toFixed(0)}
-                      % {pollMap[id].options[1].text}
-                    </div>
-                    <div>({pollMap[id].options[1].count} votes)</div>
-                  </Result>
-                </Results>
-              </>
-            )}
+                </a>
+              </Link>
+            </Icon>
+          )}
+          {pollMap[id].image && (
+            <Image
+              src={`${pollMap[id].image}`}
+              width={367}
+              height={367}
+              objectFit="cover"
+            />
+          )}
+        </ImgWrapper>
+        <FlexBox>
+          <Rather>Would You Rather</Rather>
+          <Vote>{pollMap[id].question}</Vote>
+          <RadioGroup>
+            <RadioButton
+              type="radio"
+              id="0"
+              onClick={(e) => {
+                e.preventDefault();
+                setSelected(0);
+              }}
+              value={selected == 0}
+              required
+            />
+            <Label htmlFor="1">{pollMap[id].options[0].text}</Label>
+          </RadioGroup>
+          <RadioGroup>
+            <RadioButton
+              type="radio"
+              name="0"
+              onClick={(e) => {
+                e.preventDefault();
+                setSelected(1);
+              }}
+              value={selected == 1}
+              required
+            />
+            <Label htmlFor="1">{pollMap[id].options[1].text}</Label>
+          </RadioGroup>
+          {voteId && type == "full" && (
+            <>
+              <Hr />
+              <H4>Results</H4>
+              <Results>
+                {[0, 1].map((choice) => {
+                  const poll = pollMap[id];
+                  const option = poll.options[choice];
+                  const { text, count } = option;
+                  const score = ((option.count / poll.count) * 100).toFixed(0);
 
-            <SubmitButton type="submit" data-testid="submit-button">
-              {update ? "Update" : "Submit"}
-            </SubmitButton>
-          </FlexBox>
-        </Form>
-      </ThemeProvider>
+                  return (
+                    <Result>
+                      <div>{`${score}% ${text}`}</div>
+                      <div>{`(${count} votes)`}</div>
+                    </Result>
+                  );
+                })}
+              </Results>
+            </>
+          )}
+
+          <SubmitButton type="submit" data-testid="submit-button">
+            {voteId ? "Update" : "Submit"}
+          </SubmitButton>
+        </FlexBox>
+      </Form>
     </>
   );
 };
 
 const theme = require("../../lib/styled");
 
+const Hr = styled.hr`
+  border: 0.5px solid #ccc;
+  width: 100%;
+  margin: 11px auto;
+`;
+
 const H4 = styled.div`
   font-size: 13px;
-  color: #444;
+  color: #666;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
   margin-top: 13px;
   text-align: center;
 `;
@@ -199,12 +215,16 @@ const Result = styled.div`
 
   > * {
     display: inline-block;
-    font-size: 14px;
     text-align: left;
     line-height 150%;
+    :first-child {
+      color:#333;
+      font-size: 14px;
+    }
     :last-child {
       margin-left: 4px;
-      color: #444;
+      color: #666;
+      font-size: 13px;
     }
   }
 `;
@@ -214,7 +234,7 @@ const Results = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: left;
-  width: 220px;
+  width: 240px;
   margin: 0 auto;
 `;
 
@@ -232,7 +252,7 @@ const Avatar = styled.img`
 `;
 
 const Rather = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 25px;
   font-size: 13px;
   color: #444;
   text-align: center;
@@ -256,7 +276,7 @@ const Vote = styled.div`
   font-size: 16px;
   color: #333;
   line-height: 150%;
-  margin-bottom: 40px;
+  margin-bottom: 23px;
   text-align: center;
 `;
 
@@ -326,21 +346,17 @@ const RadioButton = styled.button`
   border: 2px solid #333;
   background-color: ${(props) => (props.value ? theme.color.blue : "none")};
 
-  ${(props) => {
-    console.log(props.theme.update);
-  }}
-  transition: background-color 0.1s ease;
-
   :hover {
     background-color: ${theme.color.blue};
     cursor: pointer;
   }
 
+  transition: background-color 0.1s ease;
   margin-top: 4.5px;
 `;
 
 const Label = styled.label`
-  font-size: 16px;
+  font-size: 15px;
   color: #333;
   margin-left: 15px;
   line-height: 150%;
@@ -355,7 +371,7 @@ const SubmitButton = styled.button`
   font-weight: 500;
   border: 1px solid #333;
   width: fit-content;
-  margin: 27px auto 23px auto;
+  margin: 21px auto 25px auto;
   :hover {
     cursor: pointer;
     color: #333;

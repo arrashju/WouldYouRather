@@ -4,6 +4,7 @@ import Vote from "../../components/question/index";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import Error from "next/error";
+import Layout from "components/layouts/layout";
 
 const Question = ({ pollMap }) => {
   const router = useRouter();
@@ -11,16 +12,14 @@ const Question = ({ pollMap }) => {
   const [modal, setModal] = useState(null);
 
   useEffect(() => {
-    if (!pollMap[questions_id]) {
-      return <Error statusCode={404} />;
-    }
-  }, []);
-
-  useEffect(() => {
     if (modal != null) {
       router.push("/trending", undefined, { shallow: true });
     }
   }, [modal]);
+
+  if (!pollMap[questions_id]) {
+    return <Error statusCode={404} />;
+  }
 
   return (
     <>
@@ -31,12 +30,16 @@ const Question = ({ pollMap }) => {
   );
 };
 
+Question.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};
+
 const Display = styled.div`
   position: absolute;
   z-index: 3;
   width: 100%;
   height: 100%;
-  background: rgba(0%, 0%, 0%, 0.85);
+  background: rgba(0%, 0%, 0%, 1);
 `;
 
 export default connect((state) => {

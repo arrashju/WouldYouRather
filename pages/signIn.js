@@ -14,7 +14,11 @@ const SignIn = ({ dispatch, employeeMap }) => {
     if (selected) {
       setStatus("success");
       dispatch(handleSignIn(selected));
-      router.push("/trending", undefined, { shallow: true });
+      if (router.pathname.toLowerCase().includes("signin")) {
+        router.push("/trending", undefined, { shallow: true });
+      } else {
+        router.push(router.asPath, undefined, { shallow: true });
+      }
     } else {
       setStatus("error");
     }
@@ -99,7 +103,7 @@ const Spinner = styled.div`
     border: 3px solid #fff;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #40526d transparent transparent transparent;
+    border-color: ${theme.color.blue} transparent transparent transparent;
   }
   div:nth-child(1) {
     animation-delay: -0.45s;

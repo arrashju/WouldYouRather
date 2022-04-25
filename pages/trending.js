@@ -248,7 +248,7 @@ const Modal = styled.div`
   z-index: 3;
   width: 100%;
   height: 100%;
-  background: rgba(0%, 0%, 0%, 0.85);
+  background: rgba(100%, 100%, 100%, 0.85);
   margin: 0;
   overflow: auto;
 `;

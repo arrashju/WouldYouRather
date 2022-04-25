@@ -3,21 +3,21 @@
 exports[`Renders home page home render should match snapshot 1`] = `
 <div>
   <div
-    class="sc-jqUVSM jSXTUs"
+    class="sc-kDDrLX kZjyAP"
   >
     <div
-      class="sc-iqcoie icfUg"
+      class="sc-crXcEl ijDvBP"
     >
       <div
         style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 110px;"
       >
         <div
-          class="sc-hAZoDl cmMxAs"
+          class="sc-fnykZs gTSawv"
         >
           Would you rather forfeit an Oscar or have a lifetime ban from the Academy?
         </div>
         <button
-          class="sc-kDDrLX byjaJr"
+          class="sc-iqcoie bxyVtK"
         >
           Answer
         </button>
@@ -25,34 +25,34 @@ exports[`Renders home page home render should match snapshot 1`] = `
     </div>
   </div>
   <div
-    class="sc-jqUVSM jSXTUs"
+    class="sc-kDDrLX kZjyAP"
   >
     <div
-      class="sc-ksZaOG eMtGpr"
+      class="sc-hAZoDl ivfPuI"
     >
       Learn Opinions
     </div>
     <div
-      class="sc-crXcEl bltQBG"
+      class="sc-evZas cPTEGe"
     >
       <div
-        class="sc-evZas bGRYvd"
+        class="sc-breuTD coEVwK"
         style="background-size: cover;"
       >
         Sports fanatic?
         <button
-          class="sc-breuTD gOYgan"
+          class="sc-ksZaOG cseYUM"
         >
           View Opinions
         </button>
       </div>
       <div
-        class="sc-evZas bGRYvd"
+        class="sc-breuTD coEVwK"
         style="background-size: cover;"
       >
         Business enthusiast?
         <button
-          class="sc-breuTD gOYgan"
+          class="sc-ksZaOG cseYUM"
         >
           View Opinions
         </button>

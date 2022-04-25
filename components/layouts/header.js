@@ -80,7 +80,7 @@ const Navbar = () => {
                 minHeight: "18px",
               }}
             >
-              Me
+              {employee.name}
               <Carrot style={{ marginBottom: "3px" }}>
                 <Image src="/carrot.svg" width={11} height={8} />
               </Carrot>

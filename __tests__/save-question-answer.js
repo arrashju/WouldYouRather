@@ -8,7 +8,7 @@ import { votes } from "../lib/_DATA";
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 
-describe("Save a question", () => {
+describe("Save a question's answer", () => {
   var unsubscribe = store.subscribe(() => {
     expect(store.getState().votesMap.toEqual({ ...votes }));
   });
