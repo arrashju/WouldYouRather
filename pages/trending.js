@@ -205,7 +205,7 @@ const Topics = styled.div`
   position: fixed;
   top: 4.5em;
   left: 0;
-  width: 100%;
+  width: 90%;
   padding: 15px 5% 20px 5%;
   border-bottom: 1px solid #ddd;
   display: flex;
