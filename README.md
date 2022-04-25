@@ -4,6 +4,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 https://would-you-rather-two.vercel.app
 
+## Figma file
+
+https://www.figma.com/file/WycipTDdw7vr57NTAb8mcL/Udacity-Project?node-id=2%3A3
+
 ## Getting Started
 
 First, run the development server:
