@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useContext } from "react";
-import { useState } from "react";
 import { PollContext } from "hooks/PollContext";
 import Navigator from "./navigator";
 import { useRouter } from "next/router";

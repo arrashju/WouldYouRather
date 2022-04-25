@@ -11,10 +11,10 @@ exports[`Renders trending page trending render before loading elements should ma
     />
   </div>
   <div
-    class="sc-bBrHrO iMXppO"
+    class="sc-bBrHrO koA-DIe"
   >
     <div
-      class="sc-ivTmOn ilVgBw"
+      class="sc-ivTmOn ktyiEv"
     >
       <button
         class="sc-cxabCf hDtBGU"
@@ -43,7 +43,7 @@ exports[`Renders trending page trending render before loading elements should ma
       </button>
     </div>
     <small
-      class="sc-fLlhyt ecEZkc"
+      class="sc-fLlhyt iiLoKI"
     >
       0
        Polls
