@@ -40,27 +40,11 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icon.png"></link>
           <meta name="theme-color" content="#fff" />
-          <meta
-            name="description"
-            content="Compassionate · Confidential · Objective"
-          ></meta>
-          <meta name="keywords" content="Therapy, Life Coaching"></meta>
+          <meta name="description" content="Would You Rather"></meta>
+          <meta name="keywords" content="Employee Poll"></meta>
           <meta name="robots" content="all" />
-          <link
-            href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,500,600"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400"
-            rel="stylesheet"
-          />
           <link
             href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600"
             rel="stylesheet"
@@ -68,12 +52,7 @@ export default class MyDocument extends Document {
           <link
             rel="canonical"
             key="canonical"
-            href="https://www.needtalk.com/to/DrDeb"
-          />
-          <link
-            rel="canonical"
-            key="canonical"
-            href="https://www.needtalk.com/schedule/DrDeb"
+            href="https://would-you-rather-two.vercel.app/signIn"
           />
         </Head>
         <body>

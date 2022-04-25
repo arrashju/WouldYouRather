@@ -1,5 +1,5 @@
 import "styles/globals.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { createStore } from "redux";
 import reducer from "reducers";
 import middleware from "middleware";
@@ -7,6 +7,7 @@ import { handleInitData } from "../actions/shared";
 import { composeWithDevTools } from "redux-devtools-extension";
 import SignIn from "./signIn";
 import { Provider as ReduxProvider } from "react-redux";
+import Head from "next/head";
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 
@@ -23,15 +24,27 @@ const App = ({ Component, pageProps }) => {
 
   if (store.getState().employee["name"]) {
     return (
-      <ReduxProvider store={store}>
-        {getLayout(<Component {...pageProps} />)}
-      </ReduxProvider>
+      <>
+        <Head>
+          <title>Would You Rather</title>
+          <meta property="og:title" content="Would You Rather" key="title" />
+        </Head>
+        <ReduxProvider store={store}>
+          {getLayout(<Component {...pageProps} />)}
+        </ReduxProvider>
+      </>
     );
   } else {
     return (
-      <ReduxProvider store={store}>
-        <SignIn {...pageProps} />
-      </ReduxProvider>
+      <>
+        <Head>
+          <title>Would You Rather</title>
+          <meta property="og:title" content="Would You Rather" key="title" />
+        </Head>
+        <ReduxProvider store={store}>
+          <SignIn {...pageProps} />
+        </ReduxProvider>
+      </>
     );
   }
 };
