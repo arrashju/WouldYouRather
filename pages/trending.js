@@ -99,6 +99,7 @@ const Trending = ({ pollMap, votesMap, employee }) => {
               })
               .map((key) => {
                 const poll = pollMap[key];
+
                 return (
                   <Card
                     onClick={() => {

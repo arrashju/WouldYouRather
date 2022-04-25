@@ -91,7 +91,7 @@ const Navbar = () => {
                 style={{
                   textAlign: "center",
                   color: "#666",
-                  padding: "13px 20px",
+                  padding: "15px 20px",
                   fontSize: "15px",
                 }}
               >
@@ -100,7 +100,7 @@ const Navbar = () => {
             </Link>
             <div
               style={{
-                padding: "19px 20px 12px",
+                padding: "22px 20px 12px",
                 borderTop: "1px solid #DDD",
               }}
             >
@@ -119,7 +119,7 @@ const Navbar = () => {
             </div>
             <div
               style={{
-                padding: "12px 20px 19px",
+                padding: "12px 20px 22px",
               }}
             >
               <Link href="trending">
@@ -129,7 +129,7 @@ const Navbar = () => {
             <div
               style={{
                 borderTop: "1px solid #DDD",
-                padding: "13px 20px",
+                padding: "15px 20px",
               }}
             >
               <Link href="signIn">
