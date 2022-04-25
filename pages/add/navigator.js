@@ -7,12 +7,7 @@ const Navigator = ({ hide }) => {
   return (
     <>
       <Nav hide={hide}>
-        <BackButton
-          onClick={(e) => {
-            e.preventDefault();
-            handleBack();
-          }}
-        >
+        <BackButton onClick={handleBack} type="button">
           Back
         </BackButton>
         <Remaining>{remaining[page]}</Remaining>

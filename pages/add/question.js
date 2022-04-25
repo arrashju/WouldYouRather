@@ -62,7 +62,7 @@ const Task = styled.div`
 const Input = styled.input`
   border: none;
   border-bottom: 1px solid black;
-  width: 100%;
+  width: 85%;
   margin: 0 auto;
   background: none;
   padding: 11px 0;

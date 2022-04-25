@@ -48,10 +48,10 @@ const AddPoll = ({ dispatch, employee, employeeMap }) => {
     }));
   }, [question, options, category]);
 
-  const handleBack = () => {
+  const handleBack = (e) => {
     switch (page) {
       case "question":
-        router.push("trending", undefined, { shallow: true });
+        // router.push("trending", undefined, { shallow: true });
         break;
       case "options":
         setPage("question");
