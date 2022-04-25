@@ -267,6 +267,7 @@ const Small = styled.small`
 const Section = styled.div`
   padding: 100px 0;
   position: relative;
+  min-height: calc(100vh);
   > * {
     padding: 0 5%;
     overflow-x: scroll;

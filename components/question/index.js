@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css, ThemeProvider } from "styled-components";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { handleUpdatePoll } from "../../actions/poll";
@@ -22,6 +22,7 @@ const Question = ({
     return votesMap[key].voter == employee.name && votesMap[key].pollId == id;
   })[0];
   const [selected, setSelected] = useState(null);
+  const update = voteId;
 
   useEffect(() => {
     const selected =
@@ -85,72 +86,137 @@ const Question = ({
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        <ImgWrapper>
-          <Avatar src={`/avatars/${pollMap[id].creator}.webp`} />
-          {type == "full" ? (
-            <Icon
-              onClick={() => {
-                setModal(false);
-              }}
-            >
-              <Image src="/close.svg" width={20} height={20} />
-            </Icon>
-          ) : (
-            <Icon>
-              <Link href={`/questions/${id}`}>
-                <Image src="/expand.svg" width={20} height={20} />
-              </Link>
-            </Icon>
-          )}
-          {pollMap[id].image && (
-            <Image
-              src={`${pollMap[id].image}`}
-              width={367}
-              height={367}
-              objectFit="cover"
-            />
-          )}
-        </ImgWrapper>
-        <FlexBox>
-          <Rather>Would You Rather</Rather>
-          <Vote>{pollMap[id].question}</Vote>
-          <RadioGroup>
-            <RadioButton
-              type="radio"
-              id="0"
-              onClick={(e) => {
-                e.preventDefault();
-                setSelected(0);
-              }}
-              value={selected == 0}
-              required
-            />
-            <Label htmlFor="1">{pollMap[id].options[0].text}</Label>
-          </RadioGroup>
-          <RadioGroup>
-            <RadioButton
-              type="radio"
-              name="0"
-              onClick={(e) => {
-                e.preventDefault();
-                setSelected(1);
-              }}
-              value={selected == 1}
-              required
-            />
-            <Label htmlFor="1">{pollMap[id].options[1].text}</Label>
-          </RadioGroup>
-          <SubmitButton type="submit" data-testid="submit-button">
-            Submit
-          </SubmitButton>
-        </FlexBox>
-      </Form>
+      <ThemeProvider theme={{ update, type }}>
+        <Form onSubmit={handleSubmit}>
+          <ImgWrapper>
+            <Avatar src={`/avatars/${pollMap[id].creator}.webp`} />
+            {type == "full" ? (
+              <Icon
+                onClick={() => {
+                  setModal(false);
+                }}
+              >
+                <Image src="/close.svg" width={20} height={20} />
+              </Icon>
+            ) : (
+              <Icon>
+                <Link href={`/questions/${id}`}>
+                  <Image src="/expand.svg" width={20} height={20} />
+                </Link>
+              </Icon>
+            )}
+            {pollMap[id].image && (
+              <Image
+                src={`${pollMap[id].image}`}
+                width={367}
+                height={367}
+                objectFit="cover"
+              />
+            )}
+          </ImgWrapper>
+          <FlexBox>
+            <Rather>Would You Rather</Rather>
+            <Vote>{pollMap[id].question}</Vote>
+            <RadioGroup>
+              <RadioButton
+                type="radio"
+                id="0"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelected(0);
+                }}
+                value={selected == 0}
+                required
+              />
+              <Label htmlFor="1">{pollMap[id].options[0].text}</Label>
+            </RadioGroup>
+            <RadioGroup>
+              <RadioButton
+                type="radio"
+                name="0"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelected(1);
+                }}
+                value={selected == 1}
+                required
+              />
+              <Label htmlFor="1">{pollMap[id].options[1].text}</Label>
+            </RadioGroup>
+            {update && type == "full" && (
+              <>
+                <H4>Results</H4>
+                <Results>
+                  <Result>
+                    <div>
+                      {(
+                        (pollMap[id].options[0].count / pollMap[id].count) *
+                        100
+                      ).toFixed(0)}
+                      % God Squad
+                    </div>
+                    <div>({pollMap[id].options[0].count} votes)</div>
+                  </Result>
+                  <Result>
+                    <div>
+                      {(
+                        (pollMap[id].options[1].count / pollMap[id].count) *
+                        100
+                      ).toFixed(0)}
+                      % God Squad
+                    </div>
+                    <div>({pollMap[id].options[1].count} votes)</div>
+                  </Result>
+                </Results>
+              </>
+            )}
+
+            <SubmitButton type="submit" data-testid="submit-button">
+              {update && type == "full" ? "Update" : "Submit"}
+            </SubmitButton>
+          </FlexBox>
+        </Form>
+      </ThemeProvider>
     </>
   );
 };
 
 const theme = require("../../lib/styled");
+
+const H4 = styled.div`
+  font-size: 13px;
+  color: #444;
+  font-weight: 500;
+  margin-bottom: 20px;
+  margin-top: 13px;
+  text-align: center;
+`;
+
+const Result = styled.div`
+  :not(last-child) {
+    margin-bottom: 10px;
+  }
+
+  > * {
+    display: inline-block;
+    font-size: 14px;
+    text-align: left;
+    line-height 150%;
+    :last-child {
+      margin-left: 4px;
+      color: #444;
+    }
+  }
+`;
+
+const Results = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: left;
+  width: 220px;
+  margin: 0 auto;
+`;
 
 const Path = styled.path``;
 
@@ -186,11 +252,6 @@ const Icon = styled.div`
   z-index: 1;
 `;
 
-const Svg = styled.svg`
-  height: 18px;
-  width: 18px;
-`;
-
 const Vote = styled.div`
   font-size: 16px;
   color: #333;
@@ -210,7 +271,7 @@ const ImgWrapper = styled.div`
 
 const Form = styled.form`
   position: absolute;
-  top: 50%;
+  top: ${(props) => (props.theme.type == "full" ? "50%" : "20em")};
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0px 1px 7px 1px rgba(0, 0, 0, 0.15);
@@ -264,14 +325,18 @@ const RadioButton = styled.button`
   border-radius: 50%;
   border: 2px solid #333;
   background-color: ${(props) => (props.value ? theme.color.blue : "none")};
+
+  ${(props) => {
+    console.log(props.theme.update);
+  }}
   transition: background-color 0.1s ease;
 
   :hover {
-    cursor: pointer;
     background-color: ${theme.color.blue};
+    cursor: pointer;
   }
 
-  margin-top: 4px;
+  margin-top: 4.5px;
 `;
 
 const Label = styled.label`
@@ -290,7 +355,7 @@ const SubmitButton = styled.button`
   font-weight: 500;
   border: 1px solid #333;
   width: fit-content;
-  margin: 32px auto 23px auto;
+  margin: 27px auto 23px auto;
   :hover {
     cursor: pointer;
     color: #333;
