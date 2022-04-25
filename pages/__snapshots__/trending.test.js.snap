@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders trending page before loading elements 1`] = `
+<div>
+  <div
+    class="sc-kgflAQ daQuIQ"
+    hidden=""
+  >
+    <div
+      class="sc-hHLeRK"
+    />
+  </div>
+  <div
+    class="sc-bBrHrO iMXppO"
+  >
+    <div
+      class="sc-ivTmOn ilVgBw"
+    >
+      <button
+        class="sc-cxabCf eLiLvp"
+      >
+        All
+      </button>
+      <button
+        class="sc-cxabCf hDtBGU"
+      >
+        Sports
+      </button>
+      <button
+        class="sc-cxabCf hDtBGU"
+      >
+        Business
+      </button>
+      <button
+        class="sc-cxabCf hDtBGU"
+      >
+        Answered
+      </button>
+      <button
+        class="sc-cxabCf hDtBGU"
+      >
+        Unanswered
+      </button>
+    </div>
+    <small
+      class="sc-fLlhyt ecEZkc"
+    >
+      0
+       Polls
+    </small>
+    <div
+      class="sc-llJcti ksgYUU"
+    >
+      Trending Polls
+    </div>
+    <div
+      class="sc-iIPllB jocqib"
+    >
+      All
+    </div>
+    <div
+      class="sc-kLLXSd hDIBJC"
+    />
+  </div>
+</div>
+`;

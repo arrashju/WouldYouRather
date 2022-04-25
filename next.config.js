@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
 
-module.exports = nextConfig
+module.exports = {
+  compiler: {
+    styledComponents: true,
+  },
+  images: {
+    formats: ["image/webp"],
+  },
+  plugins: ["@typescript-eslint/eslint-plugin"],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};

@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <div
+    class="sc-jqUVSM jSXTUs"
+  >
+    <div
+      class="sc-iqcoie icfUg"
+    >
+      <div
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 110px;"
+      >
+        <div
+          class="sc-hAZoDl cmMxAs"
+        >
+          Would you rather forfeit an Oscar or have a lifetime ban from the Academy?
+        </div>
+        <button
+          class="sc-kDDrLX byjaJr"
+        >
+          Answer
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="sc-jqUVSM jSXTUs"
+  >
+    <div
+      class="sc-ksZaOG eMtGpr"
+    >
+      Learn Opinions
+    </div>
+    <div
+      class="sc-crXcEl bltQBG"
+    >
+      <div
+        class="sc-evZas bGRYvd"
+        style="background-size: cover;"
+      >
+        Sports fanatic?
+        <button
+          class="sc-breuTD gOYgan"
+        >
+          View Opinions
+        </button>
+      </div>
+      <div
+        class="sc-evZas bGRYvd"
+        style="background-size: cover;"
+      >
+        Business enthusiast?
+        <button
+          class="sc-breuTD gOYgan"
+        >
+          View Opinions
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
