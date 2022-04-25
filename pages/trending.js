@@ -180,7 +180,7 @@ const Small = styled.small`
 `;
 
 const Section = styled.div`
-  margin: 100px 0;
+  padding: 100px 0;
   position: relative;
   > * {
     padding: 0 5%;
@@ -198,20 +198,21 @@ const Section = styled.div`
 const Topics = styled.div`
   position: fixed;
   top: 4.5em;
+  left: 0;
+  width: 100%;
+  padding: 15px 0 20px 5%;
   z-index: 0;
-  padding-bottom: 20px;
-  padding-top: 15px;
   border-bottom: 1px solid #ddd;
   min-width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background: white;
   overflow-y: hidden;
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
   ::-webkit-scrollbar ;
-  background: white;
 `;
 
 const Topic = styled.button`
