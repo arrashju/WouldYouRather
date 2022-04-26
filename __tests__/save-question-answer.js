@@ -10,7 +10,7 @@ import { questions } from "../lib/_DATA";
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 
-describe("Save a question", () => {
+describe("Save a question and save an answer", () => {
   var unsubscribe = store.subscribe(() => {
     expect(store.getState().pollMap.toEqual({ ...questions }));
   });
