@@ -1,4 +1,5 @@
-import { ADD_POLL, handleAddPoll } from "../actions/poll";
+import { ADD_POLL, handleAddPoll, handleUpdatePoll } from "../actions/poll";
+import { ADD_VOTE, handleAddVote } from "../actions/votes";
 import { INIT_DATA, handleInitData } from "../actions/shared";
 import pollMap from "../reducers/pollMap";
 import { createStore } from "redux";
@@ -32,7 +33,7 @@ describe("Save a question", () => {
 
   unsubscribe();
 
-  const poll = {
+  let poll = {
     category: "Business",
     count: 0,
     creator: "Aliyah",
@@ -63,6 +64,45 @@ describe("Save a question", () => {
 
   it("dispatches poll correctly after formatting poll", async () => {
     store.dispatch(handleAddPoll(poll));
+  });
+
+  unsubscribe();
+
+  const choice = 0;
+  const vote = { pollId: 4, voter: "Aliyah", option: choice };
+
+  var unsubscribe = store.subscribe(() => {
+    expect(store.getState().votesMap.toEqual(vote));
+  });
+
+  it("dispatches vote correctly", async () => {
+    store.dispatch(handleAddVote(vote.pollId, vote));
+  });
+
+  unsubscribe();
+
+  poll.options[choice].count += 1;
+
+  //null: tie
+  //0: option 0 took the lead
+  //1: option 1 took the lead
+  const newPoll = {
+    ...poll,
+    leader:
+      poll.options[0].count == poll.options[1].count
+        ? null
+        : poll.options[0].count > poll.options[1].count
+        ? 0
+        : 1,
+    count: poll.options[0].count + poll.options[1].count,
+  };
+
+  var unsubscribe = store.subscribe(() => {
+    expect(store.getState().pollsMap.toEqual(newPoll));
+  });
+
+  it("dispatches vote correctly", async () => {
+    store.dispatch(handleUpdatePoll(0, newPoll));
   });
 
   unsubscribe();

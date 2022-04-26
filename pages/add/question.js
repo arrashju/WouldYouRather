@@ -74,6 +74,8 @@ const Input = styled.input`
     outline: 0;
     border-bottom: 2px solid black;
   }
+
+  transition: border 0.2s ease;
 `;
 
 const BackButton = styled.button`
