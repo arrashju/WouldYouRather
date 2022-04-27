@@ -10,7 +10,6 @@ import { Provider as ReduxProvider } from "react-redux";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Error from "next/error";
-import Layout from "../components/layouts/layout";
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 
