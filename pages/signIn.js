@@ -14,12 +14,14 @@ const SignIn = ({ dispatch, employeeMap }) => {
     if (selected) {
       setStatus("success");
       dispatch(handleSignIn(selected));
+      console.log(router.asPath);
       if (router.pathname.toLowerCase().includes("signin")) {
         router.push("/trending", undefined, { shallow: true });
       } else {
         router.push(router.asPath, undefined, { shallow: true });
       }
     } else {
+      console.log("test");
       setStatus("error");
     }
   };

@@ -10,7 +10,7 @@ import { questions } from "../lib/_DATA";
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 
-describe("Save a question and save an answer", () => {
+describe("Save a question", () => {
   var unsubscribe = store.subscribe(() => {
     expect(store.getState().pollMap.toEqual({ ...questions }));
   });
@@ -74,36 +74,4 @@ describe("Save a question and save an answer", () => {
   var unsubscribe = store.subscribe(() => {
     expect(store.getState().votesMap.toEqual(vote));
   });
-
-  it("saves answer correctly", async () => {
-    store.dispatch(handleAddVote(vote.pollId, vote));
-  });
-
-  unsubscribe();
-
-  poll.options[choice].count += 1;
-
-  //null: tie
-  //0: option 0 took the lead
-  //1: option 1 took the lead
-  const newPoll = {
-    ...poll,
-    leader:
-      poll.options[0].count == poll.options[1].count
-        ? null
-        : poll.options[0].count > poll.options[1].count
-        ? 0
-        : 1,
-    count: poll.options[0].count + poll.options[1].count,
-  };
-
-  var unsubscribe = store.subscribe(() => {
-    expect(store.getState().pollsMap.toEqual(newPoll));
-  });
-
-  it("updates answer correctly", async () => {
-    store.dispatch(handleUpdatePoll(0, newPoll));
-  });
-
-  unsubscribe();
 });

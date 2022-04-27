@@ -8,8 +8,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import singletonRouter from "next/router";
 import { render, fireEvent } from "@testing-library/react";
 import mockRouter from "next-router-mock";
+import "jest-styled-components";
 
 jest.mock("next/dist/client/router", () => require("next-router-mock"));
+jest.useFakeTimers();
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 
@@ -37,16 +39,19 @@ describe("Sign-in screen", () => {
         <SignIn />
       </ReduxProvider>
     );
-    let employee = component.getByTestId("Aliyah");
-    fireEvent.click(employee);
-    let submitButton = component.getByTestId("submit-button");
-    fireEvent.click(submitButton);
-    expect(component.queryByTestId("success-header")).toBeInTheDocument();
-    expect(component.queryByTestId("error-header")).not.toBeInTheDocument();
-    expect(singletonRouter).toMatchObject({
-      asPath: "/trending",
-      pathname: "/trending",
-      query: {},
-    });
+
+    setTimeout(() => {
+      let employee = component.getByTestId("Aliyah");
+      fireEvent.click(employee);
+      let submitButton = component.getByTestId("submit-button");
+      fireEvent.click(submitButton);
+      expect(component.queryByTestId("success-header")).toBeInTheDocument();
+      expect(component.queryByTestId("error-header")).not.toBeInTheDocument();
+      expect(singletonRouter).toMatchObject({
+        asPath: "/trending",
+        pathname: "/trending",
+        query: {},
+      });
+    }, 250);
   });
 });
