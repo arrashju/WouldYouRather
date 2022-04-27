@@ -9,7 +9,7 @@ import SignIn from "./signIn";
 import { Provider as ReduxProvider } from "react-redux";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Error from "next/error";
+import CustomError from "components/error";
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 
@@ -38,31 +38,23 @@ const App = ({ Component, pageProps }) => {
   }, []);
 
   if (store.getState().employee["name"]) {
-    if (error) {
-      return (
-        <>
-          <Head>
-            <title>Would You Rather</title>
-            <meta property="og:title" content="Would You Rather" key="title" />
-          </Head>
-          <ReduxProvider store={store}>
-            {getLayout(<Error statusCode={404} />)}
-          </ReduxProvider>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Head>
-            <title>Would You Rather</title>
-            <meta property="og:title" content="Would You Rather" key="title" />
-          </Head>
-          <ReduxProvider store={store}>
-            {getLayout(<Component {...pageProps} />)}
-          </ReduxProvider>
-        </>
-      );
-    }
+    return (
+      <>
+        <Head>
+          <title>Would You Rather</title>
+          <meta property="og:title" content="Would You Rather" key="title" />
+        </Head>
+        <ReduxProvider store={store}>
+          {getLayout(
+            error ? (
+              <CustomError type={404} message="This page could not be found" />
+            ) : (
+              <Component {...pageProps} />
+            )
+          )}
+        </ReduxProvider>
+      </>
+    );
   } else {
     return (
       <>

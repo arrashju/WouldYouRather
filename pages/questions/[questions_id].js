@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import Vote from "../../components/question/index";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import Error from "next/error";
 import Layout from "components/layouts/layout";
+import CustomError from "components/error";
 
 const Question = ({ pollMap }) => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const Question = ({ pollMap }) => {
   }, [modal]);
 
   if (!pollMap[questions_id]) {
-    return <Error statusCode={404} />;
+    return <CustomError type={404} message="This page could not be found" />;
   }
 
   return (
